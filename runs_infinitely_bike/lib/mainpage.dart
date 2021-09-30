@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'bike.dart';
-
 import 'cloud.dart';
-import 'building.dart';
+import 'desert.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -16,8 +15,9 @@ class _MainPage extends State<MainPage> {
   double initialHeight = bikeYaxis;
   bool gameHasStarted = false;
 
-  // 背景
-  double back = 1;
+  static double desertOneX = -1;
+  static double desertTwoX = 3.1;
+  static double desertThreeX = 7.2;
 
   bool sindou = true;
 
@@ -41,6 +41,30 @@ class _MainPage extends State<MainPage> {
         });
       }
       sindou = !sindou;
+
+      setState(() {
+        if (desertOneX < -5.3) {
+          desertOneX += 10.6;
+        } else {
+          desertOneX -= 0.03;
+        }
+      });
+
+      setState(() {
+        if (desertTwoX < -5.3) {
+          desertTwoX += 10.6;
+        } else {
+          desertTwoX -= 0.03;
+        }
+      });
+
+      setState(() {
+        if (desertThreeX < -5.3) {
+          desertThreeX += 10.6;
+        } else {
+          desertThreeX -= 0.03;
+        }
+      });
     });
   }
 
@@ -61,15 +85,30 @@ class _MainPage extends State<MainPage> {
               flex: 5,
               child: Stack(
                 children: [
-                  AnimatedContainer(
-                    // バイクの初期位置
+                  Container(
+                    alignment: Alignment(desertOneX, 1.1),
+                    child: Desert(
+                      patten: 'one',
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment(desertTwoX, 1.1),
+                    child: Desert(
+                      patten: 'two',
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment(desertThreeX, 1.1),
+                    child: Desert(
+                      patten: 'three',
+                    ),
+                  ),
+                  Container(
                     alignment: Alignment(-0.5, bikeYaxis),
-                    duration: Duration(milliseconds: 0),
-                    color: Colors.blue,
                     child: MyBike(),
                   ),
                   Container(
-                    alignment: Alignment(0, -0.2),
+                    alignment: Alignment(0, 0.2),
                     child: gameHasStarted
                         ? Text('')
                         : Text(
@@ -83,7 +122,7 @@ class _MainPage extends State<MainPage> {
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.brown,
+                color: Colors.grey,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
