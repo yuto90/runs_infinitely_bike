@@ -5,6 +5,7 @@ import 'bike.dart';
 import 'background_obj/cloud.dart';
 import 'background_obj/desert.dart';
 import 'background_obj/sabotenFlower.dart';
+import 'background_obj/yasi.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -21,8 +22,12 @@ class _MainPage extends State<MainPage> {
   static double desertTwoX = 3.1;
   static double desertThreeX = 7.2;
 
-  double sabotenFlowerYaxis = 1.1;
+  double sabotenFlowerYaxis = 1;
   static double sabotenFlowerOneX = 1;
+
+  double yasiYaxis = 1;
+  static double yasiOneX = 1;
+  static double yasiTwoX = 1.5;
 
   bool sindou = true;
 
@@ -78,7 +83,23 @@ class _MainPage extends State<MainPage> {
         if (sabotenFlowerOneX < -2) {
           sabotenFlowerOneX += 4;
         } else {
-          sabotenFlowerOneX -= 0.01;
+          sabotenFlowerOneX -= 0.005;
+        }
+      });
+
+      setState(() {
+        if (yasiOneX < -2) {
+          yasiOneX += 4;
+        } else {
+          yasiOneX -= 0.005;
+        }
+      });
+
+      setState(() {
+        if (yasiTwoX < -2) {
+          yasiTwoX += 4;
+        } else {
+          yasiTwoX -= 0.005;
         }
       });
 
@@ -129,6 +150,14 @@ class _MainPage extends State<MainPage> {
                     child: SabotenFlower(),
                   ),
                   Container(
+                    alignment: Alignment(yasiOneX, yasiYaxis),
+                    child: Yasi(pattern: 1),
+                  ),
+                  Container(
+                    alignment: Alignment(yasiTwoX, yasiYaxis),
+                    child: Yasi(pattern: 2),
+                  ),
+                  Container(
                     alignment: Alignment(-0.5, bikeYaxis),
                     child: MyBike(),
                   ),
@@ -147,7 +176,7 @@ class _MainPage extends State<MainPage> {
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.orange,
+                color: Colors.grey,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
