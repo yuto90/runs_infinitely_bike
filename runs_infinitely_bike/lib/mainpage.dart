@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'bike.dart';
-import 'cloud.dart';
-import 'desert.dart';
-import 'sabotenFlower.dart';
+import 'background_obj/cloud.dart';
+import 'background_obj/desert.dart';
+import 'background_obj/sabotenFlower.dart';
 
 class MainPage extends StatefulWidget {
   @override
