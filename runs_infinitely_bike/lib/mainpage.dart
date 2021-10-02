@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'bike.dart';
 import 'cloud.dart';
 import 'desert.dart';
+import 'sabotenFlower.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -19,6 +21,9 @@ class _MainPage extends State<MainPage> {
   static double desertTwoX = 3.1;
   static double desertThreeX = 7.2;
 
+  double sabotenFlowerYaxis = 1.1;
+  static double sabotenFlowerOneX = 1;
+
   bool sindou = true;
 
   void move() {
@@ -30,7 +35,7 @@ class _MainPage extends State<MainPage> {
 
   void startGame() {
     gameHasStarted = true;
-    Timer.periodic(Duration(milliseconds: 60), (timer) {
+    Timer.periodic(Duration(milliseconds: 100), (timer) {
       if (sindou) {
         setState(() {
           bikeYaxis = initialHeight + 0.005;
@@ -46,7 +51,7 @@ class _MainPage extends State<MainPage> {
         if (desertOneX < -5.3) {
           desertOneX += 10.6;
         } else {
-          desertOneX -= 0.03;
+          desertOneX -= 0.01;
         }
       });
 
@@ -54,7 +59,7 @@ class _MainPage extends State<MainPage> {
         if (desertTwoX < -5.3) {
           desertTwoX += 10.6;
         } else {
-          desertTwoX -= 0.03;
+          desertTwoX -= 0.01;
         }
       });
 
@@ -62,7 +67,15 @@ class _MainPage extends State<MainPage> {
         if (desertThreeX < -5.3) {
           desertThreeX += 10.6;
         } else {
-          desertThreeX -= 0.03;
+          desertThreeX -= 0.01;
+        }
+      });
+
+      setState(() {
+        if (sabotenFlowerOneX < -2) {
+          sabotenFlowerOneX += 4;
+        } else {
+          sabotenFlowerOneX -= 0.03;
         }
       });
     });
@@ -86,22 +99,23 @@ class _MainPage extends State<MainPage> {
               child: Stack(
                 children: [
                   Container(
+                    color: Colors.indigo,
+                  ),
+                  Container(
                     alignment: Alignment(desertOneX, 1.1),
-                    child: Desert(
-                      patten: 'one',
-                    ),
+                    child: Desert(),
                   ),
                   Container(
                     alignment: Alignment(desertTwoX, 1.1),
-                    child: Desert(
-                      patten: 'two',
-                    ),
+                    child: Desert(),
                   ),
                   Container(
                     alignment: Alignment(desertThreeX, 1.1),
-                    child: Desert(
-                      patten: 'three',
-                    ),
+                    child: Desert(),
+                  ),
+                  Container(
+                    alignment: Alignment(sabotenFlowerOneX, sabotenFlowerYaxis),
+                    child: SabotenFlower(),
                   ),
                   Container(
                     alignment: Alignment(-0.5, bikeYaxis),
@@ -122,7 +136,7 @@ class _MainPage extends State<MainPage> {
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.grey,
+                color: Colors.orange,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
