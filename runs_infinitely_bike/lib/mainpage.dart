@@ -26,6 +26,9 @@ class _MainPage extends State<MainPage> {
 
   bool sindou = true;
 
+  int odo = 0;
+  int milli = 0;
+
   void move() {
     setState(() {
       //time = 0;
@@ -35,7 +38,7 @@ class _MainPage extends State<MainPage> {
 
   void startGame() {
     gameHasStarted = true;
-    Timer.periodic(Duration(milliseconds: 100), (timer) {
+    Timer.periodic(Duration(milliseconds: 50), (timer) {
       if (sindou) {
         setState(() {
           bikeYaxis = initialHeight + 0.005;
@@ -75,7 +78,15 @@ class _MainPage extends State<MainPage> {
         if (sabotenFlowerOneX < -2) {
           sabotenFlowerOneX += 4;
         } else {
-          sabotenFlowerOneX -= 0.03;
+          sabotenFlowerOneX -= 0.01;
+        }
+      });
+
+      // odoメーター（1秒+=1km)
+      setState(() {
+        milli += 50;
+        if (milli % 1000 == 0) {
+          odo += 1;
         }
       });
     });
@@ -144,7 +155,7 @@ class _MainPage extends State<MainPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'TIME',
+                          'ODO: $odo km',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ],
