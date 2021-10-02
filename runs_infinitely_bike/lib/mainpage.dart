@@ -6,6 +6,7 @@ import 'background_obj/cloud.dart';
 import 'background_obj/desert.dart';
 import 'background_obj/sabotenFlower.dart';
 import 'background_obj/yasi.dart';
+import 'background_obj/car.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -13,9 +14,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
+  // バイク位置
   static double bikeY = 0.4;
-  double time = 0;
+  // バイク初期位置
   double initialHeight = bikeY;
+  // ゲーム開始フラグ
   bool gameHasStarted = false;
 
   // 背景
@@ -36,6 +39,10 @@ class _MainPage extends State<MainPage> {
   static double yasiTwoX = 1.5;
   static double yasiThreeX = 1.5;
   static double yasiFourX = 2;
+
+  // 対向車
+  double carOneY = 0.85;
+  static double carOneX = 2;
 
   bool sindou = true;
 
@@ -128,6 +135,14 @@ class _MainPage extends State<MainPage> {
         }
       });
 
+      setState(() {
+        if (carOneX < -2) {
+          carOneX += 10;
+        } else {
+          carOneX -= 0.05;
+        }
+      });
+
       // odoメーター（5秒+=1km)
       setState(() {
         milli += 50;
@@ -140,6 +155,8 @@ class _MainPage extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    // デバイス毎の画面サイズを取得
+    final double deviceHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
         if (gameHasStarted) {
@@ -152,7 +169,7 @@ class _MainPage extends State<MainPage> {
         body: Stack(
           children: [
             Container(
-              color: Colors.indigo,
+              color: Colors.blue[300],
             ),
             Container(
               alignment: Alignment(desertOneX, 1),
@@ -192,9 +209,17 @@ class _MainPage extends State<MainPage> {
             Positioned(
               bottom: 90,
               child: Container(
-                height: 5,
+                height: 3,
                 width: 1000,
                 color: Colors.white,
+              ),
+            ),
+            Positioned(
+              bottom: 40,
+              child: Container(
+                height: 7,
+                width: 1000,
+                color: Colors.blueGrey[100],
               ),
             ),
 
@@ -202,6 +227,11 @@ class _MainPage extends State<MainPage> {
             Container(
               alignment: Alignment(-0.5, bikeY),
               child: MyBike(),
+            ),
+            // 対向車 1
+            Container(
+              alignment: Alignment(carOneX, carOneY),
+              child: Car(pattern: 1),
             ),
             // ヤシの木 2
             Container(
