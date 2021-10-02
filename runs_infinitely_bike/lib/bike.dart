@@ -4,8 +4,8 @@ class MyBike extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
-      width: 90,
+      height: 70,
+      width: 70,
       child: Image.asset('lib/images/bike.png'),
     );
   }

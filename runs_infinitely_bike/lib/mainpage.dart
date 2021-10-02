@@ -13,7 +13,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
-  static double bikeY = 0.6;
+  static double bikeY = 0.4;
   double time = 0;
   double initialHeight = bikeY;
   bool gameHasStarted = false;
@@ -28,9 +28,9 @@ class _MainPage extends State<MainPage> {
   static double sabotenFlowerOneX = 1;
 
   // ヤシの木
-  double yasiOneY = -0.2;
+  double yasiOneY = -0.3;
   double yasiTwoY = 1;
-  double yasiThreeY = -0.2;
+  double yasiThreeY = -0.3;
   double yasiFourY = 1;
   static double yasiOneX = 1;
   static double yasiTwoX = 1.5;
@@ -184,9 +184,17 @@ class _MainPage extends State<MainPage> {
             Positioned(
               bottom: 45,
               child: Container(
-                height: 70,
-                width: 2000,
+                height: 80,
+                width: 1000,
                 color: Colors.grey,
+              ),
+            ),
+            Positioned(
+              bottom: 90,
+              child: Container(
+                height: 5,
+                width: 1000,
+                color: Colors.white,
               ),
             ),
 
