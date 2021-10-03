@@ -15,7 +15,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPage extends State<MainPage> {
   // バイク位置
-  static double bikeY = 0.4;
+  static double bikeY = 0.7;
   // バイク初期位置
   double initialHeight = bikeY;
   // ゲーム開始フラグ
@@ -41,7 +41,7 @@ class _MainPage extends State<MainPage> {
   static double yasiFourX = 2;
 
   // 対向車
-  double carOneY = 0.85;
+  double carOneY = 0.5;
   static double carOneX = 2;
 
   bool sindou = true;
@@ -139,7 +139,7 @@ class _MainPage extends State<MainPage> {
         if (carOneX < -2) {
           carOneX += 10;
         } else {
-          carOneX -= 0.05;
+          carOneX -= 0.02;
         }
       });
 
@@ -217,21 +217,29 @@ class _MainPage extends State<MainPage> {
             Positioned(
               bottom: 40,
               child: Container(
-                height: 7,
+                height: 10,
+                width: 1000,
+                color: Colors.blueGrey[100],
+              ),
+            ),
+            Positioned(
+              bottom: 125,
+              child: Container(
+                height: 3,
                 width: 1000,
                 color: Colors.blueGrey[100],
               ),
             ),
 
-            // バイク
-            Container(
-              alignment: Alignment(-0.5, bikeY),
-              child: MyBike(),
-            ),
             // 対向車 1
             Container(
               alignment: Alignment(carOneX, carOneY),
               child: Car(pattern: 1),
+            ),
+            // バイク
+            Container(
+              alignment: Alignment(-0.5, bikeY),
+              child: MyBike(),
             ),
             // ヤシの木 2
             Container(
