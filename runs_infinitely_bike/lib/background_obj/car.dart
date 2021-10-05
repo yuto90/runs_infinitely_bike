@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Car extends StatelessWidget {
   final pattern;
@@ -15,8 +16,8 @@ class Car extends StatelessWidget {
     }
 
     return Container(
-      height: 120,
-      width: 120,
+      height: 120.h,
+      width: 120.w,
       child: Image.asset(carPattern),
     );
   }

@@ -7,6 +7,7 @@ import 'background_obj/desert.dart';
 import 'background_obj/sabotenFlower.dart';
 import 'background_obj/yasi.dart';
 import 'background_obj/car.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -15,16 +16,17 @@ class MainPage extends StatefulWidget {
 
 class _MainPage extends State<MainPage> {
   // バイク位置
-  static double bikeY = 0.7;
+  static double bikeY = 4.7;
   // バイク初期位置
-  double initialHeight = bikeY;
+  double initialHeight = bikeY.h;
   // ゲーム開始フラグ
   bool gameHasStarted = false;
 
   // 背景
-  static double desertOneX = -1;
-  static double desertTwoX = 3.7;
-  static double desertThreeX = 8.4;
+  static double whiteLineOneX = 0;
+  static double whiteLineTwoX = 3.7;
+  static double whiteLineThreeX = 8.4;
+  static double whiteLineFourX = 8.4;
 
   // サボテンフラワー
   double sabotenFlowerY = 1;
@@ -62,36 +64,44 @@ class _MainPage extends State<MainPage> {
     Timer.periodic(Duration(milliseconds: 50), (timer) {
       if (sindou) {
         setState(() {
-          bikeY = initialHeight + 0.005;
+          bikeY = initialHeight + 5.h;
         });
       } else {
         setState(() {
-          bikeY = initialHeight - 0.005;
+          bikeY = initialHeight - 5.h;
         });
       }
       sindou = !sindou;
 
       setState(() {
-        if (desertOneX < -6) {
-          desertOneX += 12;
+        if (whiteLineOneX < -200) {
+          whiteLineOneX += 1200;
         } else {
-          desertOneX -= 0.01;
+          whiteLineOneX -= 1;
         }
       });
 
       setState(() {
-        if (desertTwoX < -6) {
-          desertTwoX += 12;
+        if (whiteLineTwoX < -6) {
+          whiteLineTwoX += 12;
         } else {
-          desertTwoX -= 0.01;
+          whiteLineTwoX -= 0.01;
         }
       });
 
       setState(() {
-        if (desertThreeX < -6) {
-          desertThreeX += 12;
+        if (whiteLineThreeX < -6) {
+          whiteLineThreeX += 12;
         } else {
-          desertThreeX -= 0.01;
+          whiteLineThreeX -= 0.01;
+        }
+      });
+
+      setState(() {
+        if (whiteLineFourX < -6) {
+          whiteLineFourX += 12;
+        } else {
+          whiteLineFourX -= 0.01;
         }
       });
 
@@ -156,7 +166,7 @@ class _MainPage extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     // デバイス毎の画面サイズを取得
-    final double deviceHeight = MediaQuery.of(context).size.height;
+    //final double deviceHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
         if (gameHasStarted) {
@@ -168,88 +178,87 @@ class _MainPage extends State<MainPage> {
       child: Scaffold(
         body: Stack(
           children: [
+            //! 背景
             Container(
-              color: Colors.blue[300],
-            ),
-            Container(
-              alignment: Alignment(desertOneX, 1),
+              color: Colors.red,
+              height: double.infinity.h,
+              width: double.infinity.w,
               child: Desert(),
-            ),
-            Container(
-              alignment: Alignment(desertTwoX, 1),
-              child: Desert(),
-            ),
-            Container(
-              alignment: Alignment(desertThreeX, 1),
-              child: Desert(),
-            ),
-            Container(
-              alignment: Alignment(sabotenFlowerOneX, sabotenFlowerY),
-              child: SabotenFlower(),
-            ),
-            // ヤシの木 1
-            Container(
-              alignment: Alignment(yasiOneX, yasiOneY),
-              child: Yasi(pattern: 1),
-            ),
-            // ヤシの木 1
-            Container(
-              alignment: Alignment(yasiThreeX, yasiThreeY),
-              child: Yasi(pattern: 2),
             ),
             // 道路
             Positioned(
-              bottom: 45,
+              bottom: 290.h,
               child: Container(
-                height: 80,
-                width: 1000,
+                height: 600.h,
+                width: 1500.w,
                 color: Colors.grey,
               ),
             ),
+
             Positioned(
-              bottom: 90,
+              bottom: 650.h,
+              left: whiteLineOneX,
               child: Container(
-                height: 3,
-                width: 1000,
+                height: 30.h,
+                width: 150.w,
                 color: Colors.white,
               ),
             ),
             Positioned(
+              bottom: 650.h,
+              left: 200,
+              child: Container(
+                height: 30.h,
+                width: 150.w,
+                color: Colors.white,
+              ),
+            ),
+            Positioned(
+              bottom: 650.h,
+              left: 400,
+              child: Container(
+                height: 30.h,
+                width: 150.w,
+                color: Colors.white,
+              ),
+            ),
+            Positioned(
+              bottom: 650.h,
+              left: 600,
+              child: Container(
+                height: 30.h,
+                width: 150.w,
+                color: Colors.white,
+              ),
+            ),
+
+            Positioned(
               bottom: 40,
               child: Container(
-                height: 10,
-                width: 1000,
+                height: 50.h,
+                width: 1500.w,
                 color: Colors.blueGrey[100],
               ),
             ),
             Positioned(
-              bottom: 125,
+              bottom: 136,
               child: Container(
-                height: 3,
-                width: 1000,
+                height: 30.h,
+                width: 1500.w,
                 color: Colors.blueGrey[100],
               ),
             ),
 
-            // 対向車 1
-            Container(
-              alignment: Alignment(carOneX, carOneY),
-              child: Car(pattern: 1),
-            ),
             // バイク
-            Container(
-              alignment: Alignment(-0.5, bikeY),
-              child: MyBike(),
-            ),
-            // ヤシの木 2
-            Container(
-              alignment: Alignment(yasiTwoX, yasiTwoY),
-              child: Yasi(pattern: 2),
-            ),
-            // ヤシの木 2
-            Container(
-              alignment: Alignment(yasiFourX, yasiFourY),
-              child: Yasi(pattern: 1),
+            Positioned(
+              bottom: 350.h + bikeY,
+              right: 600.w,
+              child: Container(
+                //alignment: Alignment(0.5, bikeY),
+                height: 500.h,
+                width: 500.w,
+                child: MyBike(),
+              ),
             ),
             Container(
               alignment: Alignment(0, 0.2),

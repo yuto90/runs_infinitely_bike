@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Yasi extends StatelessWidget {
   final pattern;
@@ -15,8 +16,8 @@ class Yasi extends StatelessWidget {
     }
 
     return Container(
-      width: 200,
-      height: 200,
+      width: 200.w,
+      height: 200.h,
       child: Image.asset(yasiPattern),
     );
   }
